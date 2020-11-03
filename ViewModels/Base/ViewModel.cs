@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Pattern_MVVM.ViewModels.Base
 {
     //internal-внутренние типы или члены доступны только внутри файлов в той же сборке
-    internal abstract class ViewModel: INotifyPropertyChanged
+    internal abstract class ViewModel: INotifyPropertyChanged,IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -36,7 +36,25 @@ namespace Pattern_MVVM.ViewModels.Base
             field = value;
             OnPropertyChanged(PropertyName);
             return false;
+        }
+        //Для деструктора
+        //~ViewModel()
+        //{
+        //    Dispose(false);
+        //}
 
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        private bool _Disposed;
+
+        protected virtual void Dispose(bool Disposing)
+        {
+            if (!Disposing || _Disposed) return;
+            _Disposed = true;
+            //Освобождение управляемых ресурсов
         }
     }
 }
