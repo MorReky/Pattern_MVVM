@@ -37,7 +37,11 @@ namespace Pattern_MVVM.ViewModels.Base
             OnPropertyChanged(PropertyName);
             return false;
         }
+
         //Для деструктора
+
+
+
         //~ViewModel()
         //{
         //    Dispose(false);

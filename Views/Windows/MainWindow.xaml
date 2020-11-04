@@ -24,7 +24,7 @@
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <TextBlock Text="1234"
+                <TextBlock Text="{Binding Status}"
                            MinWidth="150"
                            MaxWidth="350"/>
             </StatusBarItem>
@@ -57,6 +57,10 @@
                              Fill="Red" 
                              Stroke="Blue"
                              StrokeThickness="3"/>
+                    <GridSplitter Grid.Column="0"
+                                  Grid.RowSpan="2"
+                                  HorizontalAlignment="Right"
+                                  Width="4"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Вкладка 2">
