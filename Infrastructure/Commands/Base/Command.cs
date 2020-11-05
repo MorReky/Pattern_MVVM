@@ -12,7 +12,7 @@ namespace Pattern_MVVM.Infrastructure.Commands.Base
         //Событие перехода состояния возможности выполнения комманды CanExecute
         public event EventHandler CanExecuteChanged
         {
-            //Сделали так,чтобы WPF сама управляла классом Command
+            //Сделали так,чтобы WPF сама управляла союытием EventHandler
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;
         }
