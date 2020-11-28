@@ -9,7 +9,9 @@ namespace Pattern_MVVM.Infrastructure.Commands.Base
 {
     internal abstract class Command : ICommand
     {
-        //Событие перехода состояния возможности выполнения комманды CanExecute
+        /// <summary>
+        ///Событие перехода состояния возможности выполнения комманды Execute
+        /// </summary>
         public event EventHandler CanExecuteChanged
         {
             //Сделали так,чтобы WPF сама управляла классом Command
