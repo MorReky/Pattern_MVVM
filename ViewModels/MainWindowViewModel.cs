@@ -1,4 +1,5 @@
 ﻿using Pattern_MVVM.Infrastructure.Commands;
+using Pattern_MVVM.Models;
 using Pattern_MVVM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,16 @@ namespace Pattern_MVVM.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        //3:55:00
+        /// <summary>
+        /// Тестовый набор данных для визуализации графиков
+        /// </summary>
+        private IEnumerable<DataPoint> _TestDataPoints;
+        /// <summary>
+        /// Тестовый набор данных для визуализации графиков
+        /// </summary>
+        public IEnumerable<DataPoint> TestDataPoints { get => _TestDataPoints; set => Set(ref _TestDataPoints, value); }
+
         #region Заголовок окна
         private string _Title = "Анализ статистики ПО";
         /// <summary> Заголовок окна </summary>
@@ -61,6 +72,16 @@ namespace Pattern_MVVM.ViewModels
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted,CanCloseApplicationCommandExecute);
 
             #endregion
+            var data_points = new List<DataPoint>((int)(360/0.1));
+            for(var x=0d;x<=360; x+=0.1)
+            {
+                //неважно где находится,компилятор сам вынесет ее
+                const double to_rad = Math.PI / 180;
+                var y = Math.Sin(x*to_rad);
+
+                data_points.Add(new DataPoint { XValue = x, YValue = y });
+            }
+            TestDataPoints = data_points;
         }
     }
 }
