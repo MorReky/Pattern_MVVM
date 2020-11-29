@@ -13,6 +13,19 @@ namespace Pattern_MVVM.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        #region Выбранная страница
+        /// <summary>Номер выбранной вкладки</summary>
+        private int _SelectedPageIndex;
+
+        /// <summary>Номер выбранной вкладки</summary>
+        public int SelectedPageIndex
+        {
+            get => _SelectedPageIndex;
+            set => Set(ref _SelectedPageIndex, value);
+        }
+        #endregion
+
+        #region Тестовые данные для графика
         //3:55:00
         /// <summary>
         /// Тестовый набор данных для визуализации графиков
@@ -22,6 +35,7 @@ namespace Pattern_MVVM.ViewModels
         /// Тестовый набор данных для визуализации графиков
         /// </summary>
         public IEnumerable<DataPoint> TestDataPoints { get => _TestDataPoints; set => Set(ref _TestDataPoints, value); }
+        #endregion
 
         #region Заголовок окна
         private string _Title = "Анализ статистики ПО";
@@ -63,6 +77,17 @@ namespace Pattern_MVVM.ViewModels
         }
         private bool CanCloseApplicationCommandExecute(object p) => true;
         #endregion
+        #region ChangeTabIndexCommand
+        public ICommand ChangeTabIndexCommand { get; }
+
+        private void OnChangeTabIndexCommandExecute(object p)
+        {
+            if (p is null) return;
+            SelectedPageIndex +=Convert.ToInt32(p);
+        }
+
+        private bool CanChangeTabIndexCommand(object p)=>_SelectedPageIndex >=0;
+        #endregion
         #endregion
 
         public MainWindowViewModel()
@@ -70,6 +95,7 @@ namespace Pattern_MVVM.ViewModels
             #region Комманды
             //запихиваем в свойство комманду
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted,CanCloseApplicationCommandExecute);
+            ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute, CanChangeTabIndexCommand);
 
             #endregion
             var data_points = new List<DataPoint>((int)(360/0.1));

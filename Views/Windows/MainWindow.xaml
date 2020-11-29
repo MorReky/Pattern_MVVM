@@ -30,6 +30,16 @@
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"/>
             </MenuItem>
+            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="ArrowCircleLeft"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="+1">                
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="ArrowCircleRight"/>
+                </MenuItem.Header>
+            </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
@@ -38,12 +48,12 @@
                            MaxWidth="350"/>
             </StatusBarItem>
             <StatusBarItem>
-                <ProgressBar Width="120" Height="14" Value="30">                    
+                <ProgressBar Width="120" Height="14" Value="30">
                 </ProgressBar>
             </StatusBarItem>
         </StatusBar>
         <!--На самом деле это списочный элемент управления-->
-        <TabControl SelectedIndex="1">
+        <TabControl SelectedIndex="{Binding SelectedPageIndex}">
             <TabItem Header="График">
                 <oxy:Plot>
                     <oxy:Plot.Axes>
