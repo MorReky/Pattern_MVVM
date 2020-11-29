@@ -7,6 +7,7 @@
         xmlns:cmd="clr-namespace:Pattern_MVVM.Infrastructure.Commands"
         xmlns:vm="clr-namespace:Pattern_MVVM.ViewModels"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
         Title="{Binding Title}" 
         Height="450" 
@@ -41,7 +42,20 @@
                 </ProgressBar>
             </StatusBarItem>
         </StatusBar>
-        <TabControl>
+        <!--На самом деле это списочный элемент управления-->
+        <TabControl SelectedIndex="1">
+            <TabItem Header="График">
+                <oxy:Plot>
+                    <oxy:Plot.Axes>
+                        <oxy:LinearAxis Position="Left"/>
+                        <oxy:LinearAxis Position="Bottom"/>
+                    </oxy:Plot.Axes>
+                    <oxy:LineSeries Color="Red"
+                                    ItemsSource="{Binding TestDataPoints}"
+                                    DataFieldX="XValue"
+                                    DataFieldY="YValue"/>
+                </oxy:Plot>
+            </TabItem>
             <TabItem >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -85,8 +99,7 @@
                                   Width="4"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Вкладка 2">
-            </TabItem>
+
         </TabControl>
     </DockPanel>
 </Window>
