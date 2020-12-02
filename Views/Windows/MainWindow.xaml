@@ -19,13 +19,13 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <!--<MenuItem Header="Выход"
-                          Command="{Binding CloseApplicationCommand}"/>-->
-                <MenuItem Header="Выход">
+                <MenuItem Header="Выход"
+                          Command="{Binding CloseApplicationCommand}"/>
+                <!--<MenuItem Header="Выход">
                     <MenuItem.Command>
                         <cmd:CloseApplicationCommand/>
                     </MenuItem.Command>
-                </MenuItem>
+                </MenuItem>-->
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"/>
@@ -54,6 +54,25 @@
         </StatusBar>
         <!--На самом деле это списочный элемент управления-->
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
+            <TabItem Header="Студенты">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <!--<ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>-->
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Группы">
+                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"/>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1"
+                              Header="Студенты">
+                        <DataGrid>
+                            
+                        </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
             <TabItem Header="График">
                 <oxy:Plot>
                     <oxy:Plot.Axes>
@@ -66,6 +85,7 @@
                                     DataFieldY="YValue"/>
                 </oxy:Plot>
             </TabItem>
+
             <TabItem >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">

@@ -1,8 +1,10 @@
 ﻿using Pattern_MVVM.Infrastructure.Commands;
 using Pattern_MVVM.Models;
+using Pattern_MVVM.Models.Decanat;
 using Pattern_MVVM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,8 @@ namespace Pattern_MVVM.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        public ObservableCollection<Group> Groups { get; }
+        /*-------------------------------------------------*/
         #region Выбранная страница
         /// <summary>Номер выбранной вкладки</summary>
         private int _SelectedPageIndex;
@@ -65,8 +69,10 @@ namespace Pattern_MVVM.ViewModels
             set => Set(ref _Status, value);
         }
         #endregion
+        /*-------------------------------------------------*/
 
         #region Комманды
+
         #region CloseApplicationCommand
         //В этом свойстве находится сама комманда, а методы лишь оперделяют её
         public ICommand CloseApplicationCommand { get; }
@@ -90,6 +96,8 @@ namespace Pattern_MVVM.ViewModels
         #endregion
         #endregion
 
+        /*-------------------------------------------------*/
+
         public MainWindowViewModel()
         {
             #region Комманды
@@ -108,6 +116,27 @@ namespace Pattern_MVVM.ViewModels
                 data_points.Add(new DataPoint { XValue = x, YValue = y });
             }
             TestDataPoints = data_points;
+            //Создали перечисление от 1 до 10,далее делаем преобразование,берем число и на его основе создаем студентов
+            var student_index = 1;
+            var students = Enumerable.Range(1, 10).Select(i => new Student()
+            {
+                Name = $"Name {student_index}",
+                Surname = $"Surname {student_index}",
+                Patronymic = $"Patronymic {student_index++}",
+                Birthday = DateTime.Now,
+                Rating = 0
+            }) ;
+
+            //Создали перечисление от 1 до 20,далее делаем преобразование,берем число и на его основе делаем группу
+            var groups=Enumerable.Range(1,20).Select(i=>new Group()
+            { 
+            Name=$"Группа {i}",
+            Students=new ObservableCollection<Student>(students)
+            });
+
+            Groups = new ObservableCollection<Group>(groups);
+
         }
+        /*-----------------------------------------------*/
     }
 }
