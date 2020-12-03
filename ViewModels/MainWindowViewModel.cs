@@ -16,6 +16,17 @@ namespace Pattern_MVVM.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         public ObservableCollection<Group> Groups { get; }
+
+        #region Выбранная группа
+        private Group _SelectedGroup;
+
+        public Group SelectedGroup
+        {
+            get=>_SelectedGroup;
+            set=>Set(ref _SelectedGroup,value);
+        }
+        #endregion
+
         /*-------------------------------------------------*/
         #region Выбранная страница
         /// <summary>Номер выбранной вкладки</summary>
